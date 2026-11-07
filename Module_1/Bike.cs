@@ -6,7 +6,16 @@ namespace Module_1
 {
     public class Bike : ATransport
     {
-        string Type { get; set; }
+        Bike(string type, bool statys, int maxWeight, int baseCost, int costKilometer, int costKilogram) : base(type, statys, maxWeight, baseCost, costKilometer, costKilogram)
+        {
 
+        }
+
+
+
+        public override int CalculateCost(Order order)
+        {
+            return 20 + (5 * order.Kilometer);
+        }
     }
 }
