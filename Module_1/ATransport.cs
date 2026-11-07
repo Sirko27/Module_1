@@ -13,8 +13,7 @@ namespace Module_1
         int CostKilometer;
         int CostKilogram;
 
-
-
-        abstract void CalculateCost(Order order) { }
+        abstract void CalculateCost(Order order);
+        virtual void CanTake(Order order);
     }
 }
