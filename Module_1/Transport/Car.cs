@@ -14,7 +14,7 @@ namespace Module_1.Transport
 
         protected override int CalculateCost(Order order)
         {
-            return 50 + (8 * order.Distance) + (1 * order.Weight);
+            return 50 + (8 * order.Distance) + order.Weight;
         }
     }
 }
