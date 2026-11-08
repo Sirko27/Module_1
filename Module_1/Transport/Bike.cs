@@ -15,12 +15,12 @@ namespace Module_1.Transport
 
         protected override int CalculateCost(Order order)
         {
-            return 20 + (5 * order.Kilometer);
+            return 20 + (5 * order.Distance);
         }
 
         protected override void CanTake(Order order)
         {
-            if (MaxWeight <= order.Weight && _maxDistance <= order.Wistance)
+            if (MaxWeight <= order.Weight && _maxDistance <= order.Distance)
             {
                 Statys = false;
                 Console.WriteLine($"Замовлення {order.Id} взято {Type}");
