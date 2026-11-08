@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Module_1
+namespace Module_1.Transport
 {
     public abstract class ATransport
     {
