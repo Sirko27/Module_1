@@ -9,6 +9,7 @@ namespace Module_1
         public int Id { get; set; }
         public int Weight { get; set; }
         public int Distance { get; set; }
+        public bool Payment { get; set; }//1-карта 0-готівка
         public string? Description { get; set; }
 
         Order(int id, int weight, int distance, string description)
