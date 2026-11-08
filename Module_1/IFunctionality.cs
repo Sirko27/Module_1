@@ -8,11 +8,9 @@ namespace Module_1
     {
         public void CreateTransport();
         public void CreateOrder();
-
         public void GetCostDeliveryNotActiveTranspoprt();
-
         public void AssingOrder();
-
+        public void Deliver();
         public void GetInfoOrder();
     }
 }
