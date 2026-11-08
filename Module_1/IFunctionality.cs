@@ -11,6 +11,6 @@ namespace Module_1
         public void GetCostDeliveryNotActiveTranspoprt();
         public void AssingOrder();
         public void Deliver();
-        public void GetInfoOrder();
+        public void GetInfoOrder(Order[] orders);
     }
 }

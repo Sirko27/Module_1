@@ -6,6 +6,11 @@ namespace Module_1
 {
     public class DeliveryService : IFunctionality
     {
+        public void Deliver()
+        {
+
+        }
+
         public void GetInfoOrder(Order[] orders)
         {
             foreach (Order order in orders)
