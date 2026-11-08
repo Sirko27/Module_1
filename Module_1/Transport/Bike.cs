@@ -13,7 +13,7 @@ namespace Module_1.Transport
 
         }
 
-        protected override int CalculateCost(Order order)
+        protected override double CalculateCost(Order order)
         {
             return 20 + (5 * order.Distance);
         }

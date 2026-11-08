@@ -23,10 +23,10 @@ namespace Module_1.Transport
             this.CostKilogram = costKilogram;
         }
 
-        protected abstract int CalculateCost(Order order);
+        protected abstract double CalculateCost(Order order);
         protected virtual void CanTake(Order order)
         {
-            if(MaxWeight<=order.weight)
+            if(MaxWeight<=order.Weight)
             {
                 Statys = false;
                 Console.WriteLine($"Замовлення {order.Id} взято {Type}");
