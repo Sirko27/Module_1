@@ -6,13 +6,13 @@ namespace Module_1.Transport
 {
     public class Car : ATransport
     {
-        Car(string type, bool statys, int maxWeight, int baseCost, int costKilometer, int costKilogram)
+        public Car(string type, bool statys, int maxWeight, int baseCost, int costKilometer, int costKilogram)
             : base(type, statys, maxWeight, baseCost, costKilometer, costKilogram)
         {
 
         }
 
-        protected override double CalculateCost(Order order)
+        public override double CalculateCost(Order order)
         {
             return 50 + (8 * order.Distance) + order.Weight;
         }

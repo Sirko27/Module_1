@@ -6,25 +6,24 @@ namespace Module_1.Transport
 {
     public class Bike : ATransport
     {
-        int _maxDistance = 10;
+        public readonly int _maxDistance = 10;
 
-        Bike(string type, bool statys, int maxWeight, int baseCost, int costKilometer, int costKilogram) : base(type, statys, maxWeight, baseCost, costKilometer, costKilogram)
+        public Bike(string type, bool statys, int maxWeight, int baseCost, int costKilometer, int costKilogram) : base(type, statys, maxWeight, baseCost, costKilometer, costKilogram)
         {
 
         }
 
-        protected override double CalculateCost(Order order)
+        public override double CalculateCost(Order order)
         {
             return 20 + (5 * order.Distance);
         }
 
-        protected override void CanTake(Order order)
+        public override bool CanTake(Order order)
         {
-            if (MaxWeight <= order.Weight && _maxDistance <= order.Distance)
-            {
-                Statys = false;
-                Console.WriteLine($"Замовлення {order.Id} взято {Type}");
-            }
+            if (MaxWeight >= order.Weight && _maxDistance >= order.Distance)
+                return true;
+
+            return false;
         }
     }
 }

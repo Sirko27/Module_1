@@ -6,12 +6,12 @@ namespace Module_1.Transport
 {
     public abstract class ATransport
     {
-        protected string Type { get; set; }
-        protected bool Statys { get; set; }
-        protected int MaxWeight { get; set; }
-        protected int BaseCost { get; set; }
-        protected int CostKilometer { get; set; }
-        protected int CostKilogram { get; set; }
+        public string Type { get; set; }
+        public bool Statys { get; set; }
+        public int MaxWeight { get; set; }
+        public int BaseCost { get; set; }
+        public int CostKilometer { get; set; }
+        public int CostKilogram { get; set; }
 
         protected ATransport(string type, bool statys, int maxWeight, int baseCost, int costKilometer, int costKilogram)
         {
@@ -23,14 +23,13 @@ namespace Module_1.Transport
             this.CostKilogram = costKilogram;
         }
 
-        protected abstract double CalculateCost(Order order);
-        protected virtual void CanTake(Order order)
+        public abstract double CalculateCost(Order order);
+        public virtual bool CanTake(Order order)
         {
-            if(MaxWeight<=order.Weight)
-            {
-                Statys = false;
-                Console.WriteLine($"Замовлення {order.Id} взято {Type}");
-            }
+            if (MaxWeight >= order.Weight)
+                return true;
+
+            return false;
         }
     }
 }
