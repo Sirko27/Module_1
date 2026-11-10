@@ -6,11 +6,7 @@ namespace Module_1.Transport
 {
     public class Car : ATransport
     {
-        public Car(string type, bool statys, int maxWeight, int baseCost, int costKilometer, int costKilogram)
-            : base(type, statys, maxWeight, baseCost, costKilometer, costKilogram)
-        {
-
-        }
+        public Car(string type, bool statys, int maxWeight) : base(type, statys, maxWeight) { }
 
         public override double CalculateCost(Order order)
         {

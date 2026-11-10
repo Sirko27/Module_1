@@ -7,15 +7,21 @@ namespace Module_1
 {
     public class DeliveryService : IFunctionality
     {
-        public void GetCostDeliveryNotActiveTranspoprt(ATransport[] transport, Order[] order)
+        readonly List<ATransport> _transports = new();
+        readonly List<Order> _ordersActive = new();
+        readonly List<Order> _ordersHistory = new();
+
+        public void AddTransport(ATransport transport)
         {
-            for (int i = 0; i < transport.Length; i++)
+            _transports.Add(transport);
+        }
+
+        public void GetCostDeliveryNotActiveTranspoprt(Order order)
+        {
+            foreach (ATransport t in _transports)
             {
-                for (int j = 0; j < order.Length; j++)
-                {
-                    if (transport[i].CanTake(order[j]))
-                        Console.WriteLine($"{transport[i].Type} доставить замовлення {order[j].Id} за: {transport[i].CalculateCost(order[j])} грн");
-                }
+                if (t.CanTake(order))
+                    Console.WriteLine($"{t.Type} доставить замовлення {order.Id} за: {t.CalculateCost(order)} грн");
             }
         }
 
@@ -26,7 +32,9 @@ namespace Module_1
                 if (transport.CanTake(order))
                 {
                     Console.WriteLine($"{transport.Type} взяв замовлення номер: {order.Id}");
-                    transport.Statys = false;
+                    transport.Statys = true;
+                    _ordersActive.Add(order);
+                    order.AssignedTransport = transport;
                     return;
                 }
             }
@@ -34,22 +42,35 @@ namespace Module_1
             Console.WriteLine("Немає доступного транспорту");
         }
 
-        public void Deliver(ATransport transport, Order order)
+        public void Deliver(Order order)
         {
-            transport.Statys = true;
-
             if (order.PaymentMethod == true)
-                Console.WriteLine("Замовлення доставлено та оплачено карою");
+                Console.WriteLine("Замовлення доставлено та оплачено картою");
             else
                 Console.WriteLine("Замовлення доставлено та оплачено готівкою");
+
+            _ordersActive.Remove(order);
+            _ordersHistory.Add(order);
+
+            if (order.AssignedTransport != null)
+                order.AssignedTransport.Statys = false;
         }
 
-        public void GetInfoOrder(Order[] orders)
+        public void GetInfoOrderActive()
         {
-            foreach (Order order in orders)
+            foreach (Order o in _ordersActive)
             {
-                Console.WriteLine($"Замовлення {order.Id}, вага: {order.Weight}кг, відстань:{order.Distance}, " +
-                    $"оплата: {(order.PaymentMethod ? "карта" : "готівка")}, опис: {order.Description}");
+                Console.WriteLine($"Замовлення {o.Id}, вага: {o.Weight}кг, відстань:{o.Distance}, " +
+                    $"оплата: {(o.PaymentMethod ? "карта" : "готівка")}, опис: {o.Description}");
+            }
+        }
+
+        public void GetInfoOrderHistory()
+        {
+            foreach (Order o in _ordersHistory)
+            {
+                Console.WriteLine($"Замовлення {o.Id}, вага: {o.Weight}кг, відстань:{o.Distance}, " +
+                    $"оплата: {(o.PaymentMethod ? "карта" : "готівка")}, опис: {o.Description}");
             }
         }
     }

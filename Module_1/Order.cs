@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Module_1.Transport;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -11,6 +12,7 @@ namespace Module_1
         public int Distance { get; set; }
         public bool PaymentMethod { get; set; }//1-карта 0-готівка
         public string? Description { get; set; }
+        public ATransport? AssignedTransport { get; set; }
 
         public Order(int id, int weight, int distance, string description)
         {

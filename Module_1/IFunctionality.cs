@@ -8,9 +8,11 @@ namespace Module_1
 {
     public interface IFunctionality
     {
-        public void GetCostDeliveryNotActiveTranspoprt(ATransport[] transport, Order[] order);
+        public void AddTransport(ATransport transport);
+        public void GetCostDeliveryNotActiveTranspoprt(Order order);
         public void AssingOrder(ATransport transport, Order order);
-        public void Deliver(ATransport transport, Order order);
-        public void GetInfoOrder(Order[] orders);
+        public void Deliver(Order order);
+        public void GetInfoOrderActive();
+        public void GetInfoOrderHistory();
     }
 }
