@@ -7,16 +7,21 @@ namespace Module_1
 {
     public class DeliveryService : IFunctionality
     {
-        readonly List<ATransport> _transports = new();
-        readonly List<Order> _ordersActive = new();
-        readonly List<Order> _ordersHistory = new();
+        private List<ATransport> _transports = new();
+        private List<Order> _ordersActive = new();
+        private List<Order> _ordersHistory = new();
 
         public void AddTransport(ATransport transport)
         {
             _transports.Add(transport);
         }
 
-        public void GetCostDeliveryNotActiveTranspoprt(Order order)
+        public void AddOrder(Order order)
+        {
+            _ordersActive.Add(order);
+        }
+
+        public void GetCostDelivery(Order order)
         {
             foreach (ATransport t in _transports)
             {
@@ -33,21 +38,18 @@ namespace Module_1
                 {
                     Console.WriteLine($"{transport.Type} взяв замовлення номер: {order.Id}");
                     transport.Statys = true;
-                    _ordersActive.Add(order);
+                    //_ordersActive.Add(order);
                     order.AssignedTransport = transport;
                     return;
                 }
             }
 
-            Console.WriteLine("Немає доступного транспорту");
+            Console.WriteLine($"{transport.Type} не може взяти: {order.Id}");
         }
 
-        public void Deliver(Order order)
+        public void Deliver(Order order, string paymentMethod)
         {
-            if (order.PaymentMethod == true)
-                Console.WriteLine("Замовлення доставлено та оплачено картою");
-            else
-                Console.WriteLine("Замовлення доставлено та оплачено готівкою");
+            Console.WriteLine($"Замовлення доставлено та оплачено {paymentMethod}");
 
             _ordersActive.Remove(order);
             _ordersHistory.Add(order);
@@ -58,19 +60,31 @@ namespace Module_1
 
         public void GetInfoOrderActive()
         {
+            Console.WriteLine("OrderActive");
+
             foreach (Order o in _ordersActive)
             {
-                Console.WriteLine($"Замовлення {o.Id}, вага: {o.Weight}кг, відстань:{o.Distance}, " +
-                    $"оплата: {(o.PaymentMethod ? "карта" : "готівка")}, опис: {o.Description}");
+                Console.WriteLine($"Замовлення {o.Id}, вага: {o.Weight}кг, відстань:{o.Distance}, опис: {o.Description}");
             }
         }
 
         public void GetInfoOrderHistory()
         {
+            Console.WriteLine("OrderHistory");
+
             foreach (Order o in _ordersHistory)
             {
-                Console.WriteLine($"Замовлення {o.Id}, вага: {o.Weight}кг, відстань:{o.Distance}, " +
-                    $"оплата: {(o.PaymentMethod ? "карта" : "готівка")}, опис: {o.Description}");
+                Console.WriteLine($"Замовлення {o.Id}, вага: {o.Weight}кг, відстань:{o.Distance},  опис: {o.Description}");
+            }
+        }
+
+        public void GetInfoTransport()
+        {
+            Console.WriteLine("Transport");
+
+            foreach (ATransport t in _transports)
+            {
+                Console.WriteLine($"Транспорт {t.Type}, статус: {(t.Statys ? "зайнятий" : "вільний")}, ваксимальне навантаження: {t.MaxWeight}кг");
             }
         }
     }
