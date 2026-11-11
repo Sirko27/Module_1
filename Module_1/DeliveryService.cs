@@ -47,9 +47,9 @@ namespace Module_1
             Console.WriteLine($"{transport.Type} не може взяти: {order.Id}");
         }
 
-        public void Deliver(Order order, string paymentMethod)
+        public void Deliver(Order order, bool paymentMethod)
         {
-            Console.WriteLine($"Замовлення доставлено та оплачено {paymentMethod}");
+            Console.WriteLine($"Замовлення доставлено та оплачено {(paymentMethod ? "Карта" : "Готівка")}");
 
             _ordersActive.Remove(order);
             _ordersHistory.Add(order);

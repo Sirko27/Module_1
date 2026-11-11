@@ -26,10 +26,10 @@ Console.WriteLine();
 DS.GetInfoOrderActive();
 Console.WriteLine();
 
-DS.GetCostDeliveryNotActiveTranspoprt(order1);
-DS.GetCostDeliveryNotActiveTranspoprt(order2);
-DS.GetCostDeliveryNotActiveTranspoprt(order3);
-DS.GetCostDeliveryNotActiveTranspoprt(order4);
+DS.GetCostDelivery(order1);
+DS.GetCostDelivery(order2);
+DS.GetCostDelivery(order3);
+DS.GetCostDelivery(order4);
 Console.WriteLine();
 
 DS.AssingOrder(bike, order4);
@@ -42,8 +42,8 @@ Console.WriteLine();
 DS.GetInfoTransport();
 Console.WriteLine();
 
-DS.Deliver(order4, "Card");
-DS.Deliver(order3, "Cash");
+DS.Deliver(order4, true);
+DS.Deliver(order3, false);
 Console.WriteLine();
 
 DS.GetInfoOrderActive();
